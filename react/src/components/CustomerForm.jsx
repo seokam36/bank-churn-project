@@ -2,48 +2,54 @@ const numberFields = [
   {
     name: "credit_score",
     label: "신용점수",
-    placeholder: "예: 650",
-    min: 0,
+    placeholder: "350 ~ 850 (예: 650)",
+    min: 350,
+    max: 850,
     step: 1,
   },
   {
     name: "age",
     label: "나이",
-    placeholder: "예: 40",
-    min: 1,
-    step: 1,
-  },
-  {
-    name: "tenure",
-    label: "은행 이용 기간",
-    placeholder: "예: 5",
-    min: 0,
+    placeholder: "18 ~ 92 (예: 40)",
+    min: 18,
+    max: 92,
     step: 1,
   },
   {
     name: "balance",
     label: "계좌 잔액",
-    placeholder: "예: 100000",
+    placeholder: "0 ~ 250,898 (예: 100000)",
     min: 0,
+    max: 250898,
     step: "any",
-  },
-  {
-    name: "products_number",
-    label: "이용 금융상품 수",
-    placeholder: "예: 2",
-    min: 1,
-    step: 1,
   },
   {
     name: "estimated_salary",
     label: "추정 급여",
-    placeholder: "예: 60000",
+    placeholder: "0 ~ 199,992 (예: 60000)",
     min: 0,
+    max: 199992,
     step: "any",
   },
 ];
+// min / max : 학습 데이터 범위 (범위 밖 값은 모델이 본 적 없어서 예측을 믿기 어려움)
 
 const selectFields = [
+  {
+    name: "tenure",
+    label: "은행 이용 기간",
+    options: Array.from({ length: 11 }, (_, i) => [String(i), `${i}년`]),
+  },
+  {
+    name: "products_number",
+    label: "이용 금융상품 수",
+    options: [
+      ["1", "1개"],
+      ["2", "2개"],
+      ["3", "3개"],
+      ["4", "4개"],
+    ],
+  },
   {
     name: "country",
     label: "국가",
@@ -116,6 +122,7 @@ export default function CustomerForm({
                   value={form[field.name]}
                   placeholder={field.placeholder}
                   min={field.min}
+                  max={field.max}
                   step={field.step}
                   required
                   onChange={onChange}
