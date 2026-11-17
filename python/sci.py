@@ -96,8 +96,6 @@ import joblib
 joblib.dump(final_model, 'model.pkl')
 # 성능 지표 + 학습 때 범주 목록(서버에서 범주 맞출 때 사용) 따로 저장
 joblib.dump({'f1': round(test_f1, 4),
-             'cv_f1': round(study.best_value, 4),
-             'best_params': study.best_params,
              'cat_dtypes': {col: X_train[col].dtype for col in cat_cols}},
             'metrics.pkl')
 model = joblib.load('model.pkl')
