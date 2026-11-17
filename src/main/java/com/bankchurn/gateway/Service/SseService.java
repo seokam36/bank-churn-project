@@ -29,15 +29,15 @@ public class SseService {
     private final String predictPath;
 
     public SseService(
-        WebClient.Builder builder,
-        @Value("${ai.base-url}") String baseUrl,
-        @Value("${ai.predict-path}") String predictPath
-    ) {
-        this.webClient = builder
+    @Value("${ai.base-url}") String baseUrl,
+    @Value("${ai.predict-path}") String predictPath
+        ) {
+        this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
                 .build();
+
         this.predictPath = predictPath;
-    }
+        }
 
     public Flux<ServerSentEvent<String>> predict(BankDto request) {
         return webClient.post()
