@@ -45,10 +45,10 @@ def objective( trial ) :
         model = LGBMClassifier(
             n_estimators=1000,
             learning_rate=trial.suggest_float( 'learning_rate' , 0.01 , 0.1 , log=True ) ,
-            num_leaves=trial.suggest_int( 'num_leaves' , 8, 30 ),
+            num_leaves=trial.suggest_int( 'num_leaves' , 8, 30 ),   # 하나의 트리가질 수 있는 최대 리프 노드수
             max_depth=trial.suggest_int( 'max_depth' , 3 , 6 ),
             min_child_samples=trial.suggest_int( 'min_child_samples', 30 , 150 ),
-            subsample=trial.suggest_float( 'subsample' , 0.6 , 1.0 ) ,
+            subsample=trial.suggest_float( 'subsample' , 0.6 , 1.0 ) , # 무작위 샘플링
             subsample_freq=1, verbose=-1, random_state=42, n_jobs=-1 ,
             colsample_bytree=trial.suggest_float( 'colsample_bytree' , 0.6 , 1.0 ),
             class_weight='balanced',   # 분류 모델 이므로 불균형 보정
