@@ -38,3 +38,13 @@ out/
 
 ### Claude ###
 /CLAUDE.md
+
+### Python ###
+python/__pycache__/
+python/.venv/
+*.pyc
+.ipynb_checkpoints/
+
+### React ###
+react/node_modules/
+react/dist/
