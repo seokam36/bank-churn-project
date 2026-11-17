@@ -27,12 +27,12 @@ class ChurnService :
         churn       = int( self.model.predict( sample )[0] )
         probability = float( self.model.predict_proba( sample )[0][1] )
 
+        # React(PredictionResult.jsx) 가 읽는 이름에 맞춤
         return {
-            'status'      : 'done' ,
-            'churn'       : churn ,
-            'probability' : round( probability , 4 ) ,
-            'label'       : '이탈 위험' if churn == 1 else '유지 예상' ,
-            'f1'          : self.metrics['f1']
+            'prediction'       : churn ,                                  # 0 유지 / 1 이탈
+            'churn_probability': round( probability , 4 ) ,               # 이탈 확률
+            'label'            : '이탈 위험' if churn == 1 else '유지 예상' ,
+            'metrics'          : { 'f1' : self.metrics['f1'] }            # 테스트 F1
         }
 
 
